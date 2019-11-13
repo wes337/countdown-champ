@@ -7,9 +7,17 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            deadline: 'December 25, 2018',
+            deadline: '',
             newDeadline: ''
         }
+    }
+
+    componentWillMount() {
+        const d = new Date();
+        const year = d.getFullYear();
+        this.setState({
+            deadline: `December 25, ${year}`
+        })
     }
 
     changeDeadline() {
@@ -25,13 +33,13 @@ class App extends Component {
                     <Clock 
                         deadline={this.state.deadline}
                     />
-                <Form inline>
+                <Form inline className="form">
                     <FormControl
                         className="Deadline-input"
                         placeholder='new date'
                         onChange={event => this.setState({newDeadline: event.target.value})}
                     />
-                    <Button onClick={() => this.changeDeadline()}>
+                    <Button className="btn btn-primary Submit-button" onClick={() => this.changeDeadline()}>
                         Submit
                     </Button>
                 </Form>
